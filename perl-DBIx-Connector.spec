@@ -4,13 +4,14 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.56
-Release  : 1
+Release  : 2
 URL      : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdbix-connector-perl/libdbix-connector-perl_0.56-1.debian.tar.xz
 Summary  : 'Fast, safe DBI connection and transaction management'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-DBIx-Connector-license
 Requires: perl-DBIx-Connector-man
 Requires: perl(DBI)
 Requires: perl(Module::Build)
@@ -29,6 +30,14 @@ The efficient thing to do is to hang on to a database handle to maintain a
 connection to the database in order to minimize that overhead. DBIx::Connector
 lets you do that without having to worry about dropped or corrupted
 connections.
+
+%package license
+Summary: license components for the perl-DBIx-Connector package.
+Group: Default
+
+%description license
+license components for the perl-DBIx-Connector package.
+
 
 %package man
 Summary: man components for the perl-DBIx-Connector package.
@@ -60,6 +69,8 @@ fi
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/perl-DBIx-Connector
+cp deblicense/copyright %{buildroot}/usr/share/doc/perl-DBIx-Connector/deblicense_copyright
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot}
 else
@@ -80,6 +91,10 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/Pg.pm
 /usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/SQLite.pm
 /usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/mysql.pm
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/perl-DBIx-Connector/deblicense_copyright
 
 %files man
 %defattr(-,root,root,-)
