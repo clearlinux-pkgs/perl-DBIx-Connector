@@ -4,20 +4,16 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.56
-Release  : 2
+Release  : 3
 URL      : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdbix-connector-perl/libdbix-connector-perl_0.56-1.debian.tar.xz
 Summary  : 'Fast, safe DBI connection and transaction management'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
-Requires: perl-DBIx-Connector-license
-Requires: perl-DBIx-Connector-man
-Requires: perl(DBI)
-Requires: perl(Module::Build)
-Requires: perl(Test::MockModule)
+Requires: perl-DBIx-Connector-license = %{version}-%{release}
+BuildRequires : buildreq-cpan
 BuildRequires : perl(DBI)
-BuildRequires : perl(Module::Build)
 BuildRequires : perl(Test::MockModule)
 
 %description
@@ -31,6 +27,15 @@ connection to the database in order to minimize that overhead. DBIx::Connector
 lets you do that without having to worry about dropped or corrupted
 connections.
 
+%package dev
+Summary: dev components for the perl-DBIx-Connector package.
+Group: Development
+Provides: perl-DBIx-Connector-devel = %{version}-%{release}
+
+%description dev
+dev components for the perl-DBIx-Connector package.
+
+
 %package license
 Summary: license components for the perl-DBIx-Connector package.
 Group: Default
@@ -39,19 +44,11 @@ Group: Default
 license components for the perl-DBIx-Connector package.
 
 
-%package man
-Summary: man components for the perl-DBIx-Connector package.
-Group: Default
-
-%description man
-man components for the perl-DBIx-Connector package.
-
-
 %prep
-tar -xf %{SOURCE1}
-cd ..
 %setup -q -n DBIx-Connector-0.56
-mkdir -p %{_topdir}/BUILD/DBIx-Connector-0.56/deblicense/
+cd ..
+%setup -q -T -D -n DBIx-Connector-0.56 -b 1
+mkdir -p deblicense/
 mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/DBIx-Connector-0.56/deblicense/
 
 %build
@@ -69,12 +66,12 @@ fi
 
 %install
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/perl-DBIx-Connector
-cp deblicense/copyright %{buildroot}/usr/share/doc/perl-DBIx-Connector/deblicense_copyright
+mkdir -p %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector
+cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector/deblicense_copyright
 if test -f Makefile.PL; then
-make pure_install PERL_INSTALL_ROOT=%{buildroot}
+make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
-./Build install --installdirs=site --destdir=%{buildroot}
+./Build install --installdirs=vendor --destdir=%{buildroot}
 fi
 find %{buildroot} -type f -name .packlist -exec rm -f {} ';'
 find %{buildroot} -depth -type d -exec rmdir {} 2>/dev/null ';'
@@ -83,20 +80,16 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/Firebird.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/MSSQL.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/Oracle.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/Pg.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/SQLite.pm
-/usr/lib/perl5/site_perl/5.26.1/DBIx/Connector/Driver/mysql.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver/Firebird.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver/MSSQL.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver/Oracle.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver/Pg.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver/SQLite.pm
+/usr/lib/perl5/vendor_perl/5.26.1/DBIx/Connector/Driver/mysql.pm
 
-%files license
-%defattr(-,root,root,-)
-/usr/share/doc/perl-DBIx-Connector/deblicense_copyright
-
-%files man
+%files dev
 %defattr(-,root,root,-)
 /usr/share/man/man3/DBIx::Connector.3
 /usr/share/man/man3/DBIx::Connector::Driver.3
@@ -106,3 +99,7 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/share/man/man3/DBIx::Connector::Driver::Pg.3
 /usr/share/man/man3/DBIx::Connector::Driver::SQLite.3
 /usr/share/man/man3/DBIx::Connector::Driver::mysql.3
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/perl-DBIx-Connector/deblicense_copyright
