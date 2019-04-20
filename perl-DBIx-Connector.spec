@@ -4,7 +4,7 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.56
-Release  : 11
+Release  : 12
 URL      : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdbix-connector-perl/libdbix-connector-perl_0.56-1.debian.tar.xz
@@ -31,6 +31,7 @@ connections.
 Summary: dev components for the perl-DBIx-Connector package.
 Group: Development
 Provides: perl-DBIx-Connector-devel = %{version}-%{release}
+Requires: perl-DBIx-Connector = %{version}-%{release}
 
 %description dev
 dev components for the perl-DBIx-Connector package.
@@ -49,7 +50,7 @@ license components for the perl-DBIx-Connector package.
 cd ..
 %setup -q -T -D -n DBIx-Connector-0.56 -b 1
 mkdir -p deblicense/
-mv %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/DBIx-Connector-0.56/deblicense/
+cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/DBIx-Connector-0.56/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
