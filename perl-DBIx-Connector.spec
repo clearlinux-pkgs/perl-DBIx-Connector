@@ -4,7 +4,7 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.56
-Release  : 12
+Release  : 13
 URL      : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdbix-connector-perl/libdbix-connector-perl_0.56-1.debian.tar.xz
@@ -12,6 +12,7 @@ Summary  : 'Fast, safe DBI connection and transaction management'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-DBIx-Connector-license = %{version}-%{release}
+Requires: perl-DBIx-Connector-perl = %{version}-%{release}
 BuildRequires : buildreq-cpan
 BuildRequires : perl(DBI)
 BuildRequires : perl(Test::MockModule)
@@ -45,18 +46,28 @@ Group: Default
 license components for the perl-DBIx-Connector package.
 
 
+%package perl
+Summary: perl components for the perl-DBIx-Connector package.
+Group: Default
+Requires: perl-DBIx-Connector = %{version}-%{release}
+
+%description perl
+perl components for the perl-DBIx-Connector package.
+
+
 %prep
 %setup -q -n DBIx-Connector-0.56
-cd ..
-%setup -q -T -D -n DBIx-Connector-0.56 -b 1
+cd %{_builddir}
+tar xf %{_sourcedir}/libdbix-connector-perl_0.56-1.debian.tar.xz
+cd %{_builddir}/DBIx-Connector-0.56
 mkdir -p deblicense/
-cp -r %{_topdir}/BUILD/debian/* %{_topdir}/BUILD/DBIx-Connector-0.56/deblicense/
+cp -r %{_builddir}/debian/* %{_builddir}/DBIx-Connector-0.56/deblicense/
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -68,7 +79,7 @@ fi
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector
-cp deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector/deblicense_copyright
+cp %{_builddir}/DBIx-Connector-0.56/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector/fa7ae390181139d908a4930057131ca5e66efc3a
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -81,14 +92,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver/Firebird.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver/MSSQL.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver/Oracle.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver/Pg.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver/SQLite.pm
-/usr/lib/perl5/vendor_perl/5.28.2/DBIx/Connector/Driver/mysql.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -103,4 +106,15 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-DBIx-Connector/deblicense_copyright
+/usr/share/package-licenses/perl-DBIx-Connector/fa7ae390181139d908a4930057131ca5e66efc3a
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/Firebird.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/MSSQL.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/Oracle.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/Pg.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/SQLite.pm
+/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/mysql.pm
