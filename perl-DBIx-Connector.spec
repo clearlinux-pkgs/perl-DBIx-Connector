@@ -4,7 +4,7 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.56
-Release  : 13
+Release  : 14
 URL      : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DW/DWHEELER/DBIx-Connector-0.56.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdbix-connector-perl/libdbix-connector-perl_0.56-1.debian.tar.xz
@@ -79,7 +79,7 @@ fi
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector
-cp %{_builddir}/DBIx-Connector-0.56/deblicense/copyright %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector/fa7ae390181139d908a4930057131ca5e66efc3a
+cp %{_builddir}/debian/copyright %{buildroot}/usr/share/package-licenses/perl-DBIx-Connector/fa7ae390181139d908a4930057131ca5e66efc3a
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -110,11 +110,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/Firebird.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/MSSQL.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/Oracle.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/Pg.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/SQLite.pm
-/usr/lib/perl5/vendor_perl/5.30.1/DBIx/Connector/Driver/mysql.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver/Firebird.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver/MSSQL.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver/Oracle.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver/Pg.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver/SQLite.pm
+/usr/lib/perl5/vendor_perl/5.30.2/DBIx/Connector/Driver/mysql.pm
