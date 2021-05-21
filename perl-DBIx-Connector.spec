@@ -110,11 +110,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files perl
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver/Firebird.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver/MSSQL.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver/Oracle.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver/Pg.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver/SQLite.pm
-/usr/lib/perl5/vendor_perl/5.32.1/DBIx/Connector/Driver/mysql.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver/Firebird.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver/MSSQL.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver/Oracle.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver/Pg.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver/SQLite.pm
+/usr/lib/perl5/vendor_perl/5.34.0/DBIx/Connector/Driver/mysql.pm
