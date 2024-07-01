@@ -7,7 +7,7 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.59
-Release  : 28
+Release  : 29
 URL      : https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE/DBIx-Connector-0.59.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE/DBIx-Connector-0.59.tar.gz
 Source1  : http://http.debian.net/debian/pool/main/libd/libdbix-connector-perl/libdbix-connector-perl_0.56-1.debian.tar.xz
