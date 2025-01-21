@@ -7,7 +7,7 @@
 #
 Name     : perl-DBIx-Connector
 Version  : 0.60
-Release  : 30
+Release  : 31
 URL      : https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE/DBIx-Connector-0.60.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/A/AR/ARISTOTLE/DBIx-Connector-0.60.tar.gz
 Summary  : 'Fast, safe DBI connection and transaction management'
